@@ -1,0 +1,11 @@
+Choosing Challenges for WordWhile Texts:
+
+1) Avoid adding only challenges with keys to a word.  For any given category of challenge, try to include a few independent choices as well.  That way, if a key is not chosen, the word can still be assigned another challenge.
+
+2) Tricky: homonyms, synonyms, word that begin with many of the same letters or, even better, begin and end with the same letters.
+
+3) Silly: ridulous choices from the same class of things or actions.
+
+4) Two or three challenge words per 8-10 words in the original or per line of poetry.
+
+5) Composer is touchy about what can go in a challenge: for now, stick to letters and spaces. Hyphens and apostrophes are ok too.

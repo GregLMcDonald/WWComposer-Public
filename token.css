@@ -1,0 +1,63 @@
+/* TOKEN CLASSES */
+
+.token {
+	/*font-family: Courier;*/
+    border: none;
+    padding: 0px;
+    color: black;
+    margin-left: 0px;
+    margin-right: 0px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em;
+    outline: none; /* this gets rid of the blue outline that normally is added when you click a BUTTON element  */
+    float: left;
+    /*border: 0.5px solid black;*/
+    display: inline-block;
+/*    display: inline;*/
+}
+
+.token_clicked{
+	background-color: black;
+    color: white;
+}
+.token_neutral{
+	background: none;
+    color: black;
+}
+
+.token_unclickedKey{
+    background: none;
+    color: red;   
+}
+
+.token_clickedKey{
+    background-color: red;
+    color: white;
+}
+
+.tokenHasChallenges{
+    font-style: italic;
+    font-weight: bold;
+}
+
+.hasPunctuation{
+	background-color: #FF0000;
+}
+
+.spacetoken {
+    /* background-color: #4CAF50;   Green */
+    border: none;
+    padding: 0px;
+    background:none; 
+   /* background-color: #FFF0F0; */
+    color: black;
+    /* padding: 15px 32px; */
+    margin-left: 0px;
+    margin-right: 0px;
+    text-align: center;
+    text-decoration: none; 
+    display: inline-block;
+  	font-size: 0.4em;
+    outline: none;
+}

@@ -1,0 +1,250 @@
+:root {
+    --main-font: Verdana;
+};
+
+html, body, input {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    font-family: var(--main-font);
+}
+p {
+    font-family: var(--main-font);
+    margin: 0;
+    padding: 0;
+}
+button {
+    font-family: var(--main-font);
+}
+textarea {
+    font-family: var(--main-font);
+}
+input {
+    font-family: var(--main-font);
+}
+
+
+.fileHandlingDiv {
+    margin: 8px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-color: black;
+}
+
+.httpResponseDiv {
+     margin: 8px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-color: black;
+}
+
+
+
+.operationButton {
+	background-color: white; 
+   
+    border-radius: 10px;
+    border-color:black;
+
+
+
+    float:right;
+
+    padding: 0px;
+    color: white;
+    padding: 5px 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5em;
+    /* outline: none; */
+}
+
+.operationButtonDisabled {
+     border-width: 0px;
+    /* box-shadow: none; */
+    background-color: #DDDDDD;
+    color: #BBBBBB;
+}
+
+.operationButtonEnabled {
+   /*  box-shadow: 5px 5px 5px gray; */
+    border-width: 1px;
+    background-color: white;
+    color: black;       
+}
+
+
+
+.textarea {
+	font-size: 1em;
+	/* font-family: Courier;*/*/
+	border: none;
+    outline: none;
+	background-color: #FFFFEE;
+	resize: none;
+    width: 100%;
+}
+
+.editbox {
+	
+    /*
+	position: absolute;
+    */
+    position: fixed;
+	height: 600px;
+	width: 450px;
+	z-index: 10;
+	/*font-size: 18px;
+	font-family: Courier;*/
+	border: 1px;
+	border-color: #000000;
+	border-style: solid;
+}
+
+.singleEditMode {
+    background-color: #F9FFF9;
+}
+.globalEditMode {
+    background-color: #F9F9FF;
+}
+
+.editBoxButton {
+	background-color: #4CAF50;  /* Green */
+    border: 1px;
+    padding: 0px;
+    color: white;
+    padding: 5px 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--main-font);
+    font-size: 1em;
+    /* outline: none;    this is what makes the button "glow" when it has focus */
+   /* font-family: Courier;
+    font-size: 18px;*/
+}
+.editBoxCancelButton{
+    background-color: red;
+}
+
+.bottomRight {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+}
+.bottomLeft {
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+}
+
+.challengeBoxText{
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 0px;
+    width: 8em;
+}
+.challengeBoxSelect{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.editBoxText {
+	font-family: var(--main-font);
+    font-size: 1em;
+}
+.existingChallengeInEditBox {
+    margin-left: 5px    ;
+}
+
+.navbar {
+	background-color: #000080;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+.navBarButton {
+	background: none;
+    border: none;
+    padding: 5px;
+    color: white;
+    padding: 5px 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5em;
+    outline: none;
+}
+
+.buttonDisabled{
+    color: gray;
+}
+.buttonEnabled{
+    color: white;
+}
+.buttonSelected{
+    background-color: #6060D0;
+}
+.buttonNotSelected{
+    background: none;
+}
+
+
+.editTextDiv {
+	margin: 20px;
+}
+
+.tokens {
+	margin: 20px; 
+}
+
+.whitespaceToken{
+
+}
+.punctuationToken{
+    
+}
+
+.textTitleDiv {
+    margin: 20px;
+    font-family: var(--main-font);
+    font-weight: bold;
+    text-decoration: underline;
+    padding: 0px;
+    color: black;
+    font-size: 1em;
+}
+
+.textIntroDiv {
+    margin: 20px;
+    font-family: var(--main-font);
+    padding: 0px;
+    color: black;
+    font-size: 1em;
+}
+
+.lineDiv {
+    border: 1px solid httpResponseDiv;
+    clear: left;
+}
+
+
+
+.visible {
+	display: block;
+}
+.hidden {
+	display: none;
+}
+
+.textSelect {
+    font-size: 1.5em;
+}
