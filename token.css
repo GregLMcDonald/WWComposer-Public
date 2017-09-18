@@ -36,6 +36,11 @@
     color: white;
 }
 
+.token_clickedShuffle{
+    background-color: blue;
+    color: white;
+}
+
 .tokenHasChallenges{
     font-style: italic;
     font-weight: bold;
