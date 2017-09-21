@@ -1,3 +1,6 @@
+
+var GWWOfflineTesting = false;
+
 /*
 
 WordWhile is played by filling in blanks in "timeless" texts.  For each blank, the player
@@ -41,7 +44,7 @@ The whole "word index" vs "token index" situation is very confusing...
 */
 
 
-var GWWOfflineTesting = false;
+
 
 var GWWFileSavingDisabled;
 disableSave();
@@ -84,8 +87,7 @@ function disableShuffle(){
 
 }
 function enableShuffle(){
-	console.log('in enableShuffle');
-
+	
 	var elem;
 	elem = document.getElementById("navBar_Shuffle");
 	elem.disabled = false;
@@ -357,8 +359,6 @@ function shuffleSelectToken( tokenElement ){
 	if (tokenElement == null){ 
 		return; 
 	}
-
-	console.log('shuffleSelectToken');
 
 
 	var nSelected = GWWShuffleSelectedTokenElements.length;
@@ -1247,6 +1247,9 @@ function submitChallenge( event ){
 
 		}
 
+		addChallengeToTokenInfo( GWWCurrentTokenInfo, challengeWord, challengeType, challengeKey, challengeIndex, challengeNeededKey);
+
+		/*
 		if (GWWChallengeEditMode === "single")
 		{
 
@@ -1266,25 +1269,26 @@ function submitChallenge( event ){
 
 			alert("global editing not yet implemented with proper indexing of challenges");
 
-/*
-			for (var i=0; i < GWWTokenModel.length; i++){
-				var line = GWWTokenModel[i];
-				for (var j = 0; j < line.length; j++){
-					var token = line[j];
-					var tokenWord = token[0][0];
-					if (tokenWord === originalWord){
-
+			
+			//for (var i=0; i < GWWTokenModel.length; i++){
+			//	var line = GWWTokenModel[i];
+			//	for (var j = 0; j < line.length; j++){
+			//		var token = line[j];
+			//		var tokenWord = token[0][0];
+			//		if (tokenWord === originalWord){
+		
 						//Need to determine highest challenge index for this token's existing challenges
 
-						var newChallenge = [ challengeWord, challengeType, challengeKey, challengeIndex ];
-						token.push( newChallenge );
-					}
-				}
-			}
-			updateAppearanceOfAllTokenElements();
+			//				var newChallenge = [ challengeWord, challengeType, challengeKey, challengeIndex ];
+			//			token.push( newChallenge );
+			//		}
+			//	}
+			//}
+			//updateAppearanceOfAllTokenElements();
 
-			*/
+			
 		}
+		*/
 
 
 
@@ -1339,8 +1343,10 @@ function isDuplicateChallengeForTokenInfo( tokenInfo, challengeWord, challengeTy
 
 				var keyStatusSame = false; //can be a key?
 
-				if (typeof existingChallengeKey != "undefined" &&
-					existingChallengeKey === challengeKey){
+				if ( (typeof existingChallengeKey == 'undefined' && challengeKey === false) ||  
+					(typeof existingChallengeKey != 'undefined' &&
+					existingChallengeKey === challengeKey) ) {
+
 					keyStatusSame = true;
 				}
 
@@ -1363,11 +1369,11 @@ function isDuplicateChallengeForTokenInfo( tokenInfo, challengeWord, challengeTy
 				}
 
 
-
 				if (existingChallengeWord === challengeWord && 
 					existingChallengeType === challengeType &&
 					keyStatusSame === true &&
 					keyDependanceSame === true ){
+
 
 					//This is an exact duplicate of an existing challenge.  Reject submission and return.
 
@@ -1378,6 +1384,50 @@ function isDuplicateChallengeForTokenInfo( tokenInfo, challengeWord, challengeTy
 	}
 
 	return highestExistingChallengeIndex;
+
+}
+
+//function addChallengeToTokenInfo( tokenInfo, challengeWord, challengeType, challengeKey, challengeIndex, challengeNeededKey)
+function addChallengeToTokenInfo( tokenInfo, challengeWord, challengeType, challengeKey, challengeIndex, challengeNeededKey){
+
+		if (GWWChallengeEditMode === "single")
+		{
+
+			//Add the new challenge to the model
+			if ( tokenInfo ){
+				var newChallenge = [];
+				newChallenge[ GWWCHALLENGE_WORD ] = challengeWord;
+				newChallenge[ GWWCHALLENGE_TYPE ] = challengeType;
+				newChallenge[ GWWCHALLENGE_KEY ] = challengeKey;
+				newChallenge[ GWWCHALLENGE_INDEX ] = challengeIndex;
+				newChallenge[ GWWCHALLENGE_NEEDEDKEY ] = challengeNeededKey;
+				newChallenge[ GWWCHALLENGE_DEPELEMENTS ] = []; //it's new, so it can't have dependent challenges yet.
+				tokenInfo.push(newChallenge);
+			}
+		} else 
+		{
+
+			alert("global editing not yet implemented with proper indexing of challenges");
+
+			/*
+			for (var i=0; i < GWWTokenModel.length; i++){
+				var line = GWWTokenModel[i];
+				for (var j = 0; j < line.length; j++){
+					var token = line[j];
+					var tokenWord = token[0][0];
+					if (tokenWord === originalWord){
+
+						//Need to determine highest challenge index for this token's existing challenges
+
+						var newChallenge = [ challengeWord, challengeType, challengeKey, challengeIndex ];
+						token.push( newChallenge );
+					}
+				}
+			}
+			updateAppearanceOfAllTokenElements();
+
+			*/
+		}
 
 }
 
@@ -2881,36 +2931,38 @@ function navBarButtonClick(event){
 
 	} else if (id === "navBar_Shuffle" ){
 
-		console.log('shuffle clicked')
-		console.log('GWWShuffleDisabled', GWWShuffleDisabled );
+		if (GWWViewFilter == null ){
 
+			alert('Switch the view to a filtered mode (Silly or Tricky) before selecting for shuffle. Shuffled challenges will be added with that challenge type.');
 
-		div = document.getElementById("navBar_Shuffle");
+		} else {
 
-		if ( GWWShuffleDisabled === false ){
+			div = document.getElementById("navBar_Shuffle");
 
-			if ( GWWShuffleSelection === false ){
+			if ( GWWShuffleDisabled === false ){
 
-				cancelEditBox();
-				clearKeyChallenge();
+				if ( GWWShuffleSelection === false ){
 
-				event.target.className = event.target.className.replace("buttonNotSelected","buttonSelected");
-				event.target.innerHTML = 'Shuffle!';
-				GWWShuffleSelection = true;
+					cancelEditBox();
+					clearKeyChallenge();
 
-			} else {
+					event.target.className = event.target.className.replace("buttonNotSelected","buttonSelected");
+					event.target.innerHTML = 'Shuffle!';
+					GWWShuffleSelection = true;
 
-				createShuffleEntries();
+				} else {
 
-				GWWShuffleSelection = false;
+					createShuffleEntries();
 
-				if ( GWWShuffleSelectedTokenElements.length > 0 ){
-					GWWCurrentTokenElement = null;
-					for (var i = 0; i < GWWShuffleSelectedTokenElements.length; i++){
-						var selectedTokenElement = GWWShuffleSelectedTokenElements[ i ];
-						updateTokenAppearance( selectedTokenElement );
+					GWWShuffleSelection = false;
+
+					if ( GWWShuffleSelectedTokenElements.length > 0 ){
+						GWWCurrentTokenElement = null;
+						for (var i = 0; i < GWWShuffleSelectedTokenElements.length; i++){
+							var selectedTokenElement = GWWShuffleSelectedTokenElements[ i ];
+							updateTokenAppearance( selectedTokenElement );
+						}
 					}
-				}
 
 				GWWShuffleSelectedTokenElements = []; //clear all elements from array (now that they have been used to make entries and cleared of status)
 
@@ -2920,11 +2972,17 @@ function navBarButtonClick(event){
 
 			}
 
+		
+			updateEditBox();
 		}
 
-		updateEditBox();
+	
 
 	}
+
+
+
+}
 
 }
 function updateEditBox(){
@@ -2966,27 +3024,33 @@ function updateEditBox(){
 
 function createShuffleEntries(){
 
+	if (GWWViewFilter === null ){
+		alert('Cannot create shuffle challenges if view filter is not set.');
+		return;
+	}
+
 	var targetElement;
-	var targetToken;
+	var targetTokenInfo;
 	var targetWord;
 
 	var sourceElement;
-	var sourceToken;
+	var sourceTokenInfo;
 	var sourceWord;
 
 	var original;
 
 
-	var type = 'Silly';
+
+	var type = GWWViewFilter;
 	var key = false;
 	var neededKey = [];
-
+	var index;
 
 	for ( var i = 0; i < GWWShuffleSelectedTokenElements.length; i++){
 
 		targetElement = GWWShuffleSelectedTokenElements[ i ];
-		targetToken = tokenForElementId( targetElement.id );
-		original = targetToken[0];
+		targetTokenInfo = tokenForElementId( targetElement.id );
+		original = targetTokenInfo[0];
 
 		targetWord = original[ GWWCHALLENGE_WORD ];
 
@@ -2996,19 +3060,26 @@ function createShuffleEntries(){
 		for ( var j = 0; j < GWWShuffleSelectedTokenElements.length; j++){
 
 			sourceElement = GWWShuffleSelectedTokenElements[ j ]
-			sourceToken = tokenForElementId( sourceElement.id );
-			original = sourceToken[0];
+			sourceTokenInfo = tokenForElementId( sourceElement.id );
+			original = sourceTokenInfo[0];
 			sourceWord = original[ GWWCHALLENGE_WORD ];
 
 
-			console.log('dupicate?',isDuplicateChallengeForTokenInfo( targetToken, sourceWord, type, key, neededKey ));
-			
+			if ( targetWord != sourceWord ){
+				
+				index = isDuplicateChallengeForTokenInfo( targetTokenInfo, sourceWord, type, key, neededKey );
+				
+				
+				if ( index != -9999 ){
 
+					index = index + 1;
 
-			if ( targetWord === sourceWord ){
+					//console.log(sourceWord,"-->",targetWord);
 
-			} else {
-				console.log(targetWord+'--> '+sourceWord );
+					addChallengeToTokenInfo( targetTokenInfo, sourceWord, type, key, index, neededKey  );
+					
+
+				} 
 			}
 
 		}
